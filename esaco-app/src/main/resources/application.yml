@@ -5,6 +5,9 @@ server:
   use-forward-headers: ${ESACO_USE_FORWARD_HEADERS:false}
 
 spring:
+  application:
+    name: esaco
+
   profiles:
     active: prod
 

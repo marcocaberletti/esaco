@@ -40,6 +40,8 @@ import org.springframework.http.converter.json.Jackson2ObjectMapperBuilder;
 import org.springframework.web.client.RestTemplate;
 
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
+import com.uber.jaeger.Configuration.ReporterConfiguration;
+import com.uber.jaeger.Configuration.SamplerConfiguration;
 
 import eu.emi.security.authn.x509.X509CertChainValidatorExt;
 import eu.emi.security.authn.x509.impl.SocketFactoryCreator;
@@ -185,5 +187,19 @@ public class EsacoConfiguration {
   @Bean
   public TimeProvider timeProvider() {
     return new SystemTimeProvider();
+  }
+
+  @Bean
+  public io.opentracing.Tracer jaegerTracer() {
+    return new com.uber.jaeger.Configuration("esaco")
+      // .withSampler(new SamplerConfiguration().withType("const").withParam(1).withManagerHostPort(
+      // "localhost:5778"))
+      // .withReporter(new ReporterConfiguration().withLogSpans(true)
+      // .withFlushInterval(1000)
+      // .withMaxQueueSize(10000)
+      // .withSender(new SenderConfiguration().withAgentHost("localhost").withAgentPort(5775)))
+      .withSampler(SamplerConfiguration.fromEnv())
+      .withReporter(ReporterConfiguration.fromEnv())
+      .getTracer();
   }
 }

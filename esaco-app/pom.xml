@@ -116,8 +116,19 @@
       <artifactId>junit</artifactId>
       <scope>test</scope>
     </dependency>
-  </dependencies>
+    
+	<dependency>
+      <groupId>io.opentracing.contrib</groupId>
+	  <artifactId>opentracing-spring-web-autoconfigure</artifactId>
+	  <version>0.2.1</version>
+	</dependency>
 
+	<dependency>
+	  <groupId>com.uber.jaeger</groupId>
+	  <artifactId>jaeger-core</artifactId>
+	  <version>0.26.0</version>
+	</dependency>
+  </dependencies>
 
   <build>
     <plugins>
